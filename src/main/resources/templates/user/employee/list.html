@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>従業員一覧</title>
+</head>
+<body>
+    <h1>従業員一覧</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+            <th>削除フラグ</th>
+            <th>登録日時</th>
+            <th>更新日時</th>
+        </tr>
+        <!-- データ -->
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.delete_flag}"></td>
+            <td th:text="${employee.created_at}"></td>
+            <td th:text="${employee.updated_at}"></td>
+        </tr>
+    </table>
+</body>
+</html>
