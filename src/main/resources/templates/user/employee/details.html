@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Employee Details</title>
+    <title>詳細</title>
 </head>
 <body>
     <h1>詳細表示</h1>
@@ -28,5 +28,6 @@
             <td th:text="${employee.updated_at}"></td>
         </tr>
     </table>
+        <a th:href="@{/employee/list}">Back to List</a>
 </body>
 </html>

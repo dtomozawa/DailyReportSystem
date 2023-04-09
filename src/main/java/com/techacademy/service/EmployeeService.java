@@ -24,5 +24,7 @@ public class EmployeeService {
     public static Optional<Employee> getEmployeeById(Integer id) {
         return employeeRepository.findById(id);
     }
-
+    public static Employee saveEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
 }
