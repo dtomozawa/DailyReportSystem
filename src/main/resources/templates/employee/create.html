@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>新規作成</title>
+</head>
+<body>
+    <h1>新規作成</h1>
+    <form th:action="@{/employee/create}" th:object="${employee}" method="post">
+        <!-- Input fields for employee properties -->
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>
