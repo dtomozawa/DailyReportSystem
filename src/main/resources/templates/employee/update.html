@@ -2,13 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Update Employee</title>
+    <title>Employee Management System</title>
+    <link rel="stylesheet" th:href="@{/css/employee/update.css}">
 </head>
 <body>
-    <h1>Update Employee</h1>
-    <form th:action="@{/employee/update}" th:object="${employee}" method="post">
-        <!-- Input fields for employee properties -->
-        <button type="submit">Update</button>
+    <h1>Employee情報管理システム</h1>
+    <h2>Employee更新</h2>
+    <form method="post" th:action="@{/employee/update/{id}/(id=${employee.id})}" th:object="${employee}">
+        <label for="id">ID</label>
+        <input type="hidden" id="id" name="id" th:value="*{id}" th:text="*{id}">
+        <br>
+        <label for="name">氏名</label>
+        <input type="text" th:field="*{name}">
+        <br>
+        <label for="delete_flag">削除フラグ</label>
+        <input type="text" th:field="*{delete_flag}">
+        <br>
+        <label for="created_at">登録日時</label>
+        <input type="text" th:field="*{created_at}" readonly>
+        <br>
+        <label for="updated_at">更新日時</label>
+        <input type="text" th:field="*{updated_at}" readonly>
+        <br>
+        <br>
+        <input type="submit" value="更新実行">
+        <a th:href="@{/employee/list}">更新せずに一覧に戻る</a>
     </form>
 </body>
 </html>

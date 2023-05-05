@@ -2,28 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>DailyReport</title>
-        <link rel="stylesheet" th:href="@{/css/user/list.css}">
+    <title>Employee Management System</title>
+    <link rel="stylesheet" th:href="@{/css/employee/list.css}">
 </head>
 <body>
-    <h1>一覧</h1>
-        <h2>従業員一覧(全件)</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>名前</th>
-            <th>削除フラグ</th>
-            <th>登録日時</th>
-            <th>更新日時</th>
-        </tr>
-        <tr th:each="employee : ${employees}">
-            <td th:text="${employee.id}"></td>
-            <td th:text="${employee.name}"></td>
-            <td th:text="${employee.delete_flag}"></td>
-            <td th:text="${employee.created_at}"></td>
-            <td th:text="${employee.updated_at}"></td>
-        </tr>
+    <h1>Employee情報管理システム</h1>
+    <h2>Employee一覧(全件)</h2>
 
-    </table>
+    <form name="frm" method="post" th:action="@{/employee/list}">
+        <a th:href="@{/employee/create}">Employeeの登録</a>
+        <input type="submit" name="deleteRun" id="deleteRun" value="(選択)したEmployeeを一括削除">
+        <table>
+            <tr>
+                <th class="center">(選択)</th>
+                <th>ID</th>
+                <th>氏名</th>
+                <th>削除フラグ</th>
+                <th>登録日時</th>
+                <th>更新日時</th>
+                <th></th>
+            </tr>
+            <tr th:each="employee : ${employeeList}">
+                <td class="center"><input type="checkbox" name="idck" th:value="${employee.id}"></td>
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.delete_flag}"></td>
+                <td th:text="${employee.created_at}"></td>
+                <td th:text="${employee.updated_at}"></td>
+                <td>
+                 <a th:href="@{/employee/details/{id}(id=${employee.id})}">詳細</a>
+                 <a th:href="@{/employee/update/{id}(id=${employee.id})}">更新</a>
+                 <form th:action="@{/employee/delete/{id}(id=${employee.id})}" method="post" style="display:inline;">
+                 <input type="submit" value="削除">
+                 </td>
+            </tr>
+        </table>
+    </form>
+    <script th:src="@{/js/employee/list.js}"></script>
+
 </body>
 </html>
+
+

@@ -2,13 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>新規作成</title>
+    <title>Employee Management System</title>
+    <link rel="stylesheet" th:href="@{/css/employee/create.css}">
 </head>
 <body>
-    <h1>新規作成</h1>
-    <form th:action="@{/employee/create}" th:object="${employee}" method="post">
-        <!-- Input fields for employee properties -->
-        <button type="submit">Create</button>
+    <h1>Employee情報管理システム</h1>
+    <h2>Employee登録</h2>
+    <form method="post" th:action="@{/employee/create}" th:object="${employee}">
+        <label for="name">氏名</label>
+        <input type="text" th:field="*{name}">
+        <br>
+        <input type="hidden" th:field="*{delete_flag}" th:value="0">
+        <br>
+        <input type="submit" value="登録実行">
+        <a th:href="@{/employee/list}">登録せずに一覧に戻る</a>
     </form>
 </body>
 </html>
+
