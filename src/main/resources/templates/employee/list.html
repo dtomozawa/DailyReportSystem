@@ -25,7 +25,7 @@
                 <th>更新日時</th>
                 <th></th>
             </tr>
-            <tr th:each="employee : ${employeeList}">
+            <tr th:each="employee : ${employeelist}">
                 <td class="center"><input type="checkbox" name="idck" th:value="${employee.id}"></td>
                 <td th:text="${employee.id}"></td>
                 <td th:text="${employee.name}"></td>

@@ -33,11 +33,11 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-	public Object getEmployeeList() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+
+	
+
 	}
-}
+
 
 
 

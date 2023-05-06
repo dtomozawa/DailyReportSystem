@@ -2,6 +2,7 @@ package com.techacademy.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,7 +49,7 @@ public class Employee {
     @NotNull
     private Date updated_at;
 
-    @OneToOne(mappedBy="employee") // "user"から"employee"に変更
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private Authentication authentication;
 
     /** レコードが削除される前に行なう処理 */
@@ -58,12 +59,7 @@ public class Employee {
         // 認証エンティティからemployeeを切り離す // "user"から"employee"に変更
         if (authentication != null) {
             authentication.setEmployee(null); // "setUser"から"setEmployee"に変更
-        
-        }
-    }
+                }
+    }}
 
-	public Object getAuthentication() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-}
+	

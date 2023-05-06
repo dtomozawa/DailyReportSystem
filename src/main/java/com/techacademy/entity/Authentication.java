@@ -2,7 +2,6 @@ package com.techacademy.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -39,22 +38,15 @@ public class Authentication {
 
     /** 従業員テーブルのID */
     @OneToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
-    @NotNull
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
-	public String getPassword() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	
+	
+
+	
 	}
 
-	public String getCode() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	public void setEmployee(Object object) {
-		// TODO 自動生成されたメソッド・スタブ
 		
-	}
-}
+	
+
