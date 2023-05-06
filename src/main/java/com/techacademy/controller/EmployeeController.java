@@ -1,14 +1,17 @@
 package com.techacademy.controller;
 
-import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techacademy.entity.Employee;
 import com.techacademy.service.EmployeeService;
@@ -23,8 +26,8 @@ public class EmployeeController {
     }
 
     @GetMapping({ "/", "/list" })
-    public String getHome(Model model) {
-        model.addAttribute("employeeList", service.getAllEmployees());
+    public String getList(Model model) {
+        model.addAttribute("employeelist", service.getEmployeeList());
         return "employee/list";
     }
 
@@ -33,47 +36,30 @@ public class EmployeeController {
         return "employee/create";
     }
 
-
-    @GetMapping("/details/{id}")
-    public String getEmployeeDetails(@PathVariable("id") Integer id, Model model) {
-        Optional<Employee> employee = service.getEmployeeById(id);
-        if (employee.isPresent()) {
-            model.addAttribute("employee", employee.get());
-            return "employee/details";
-        } else {
-            return "redirect:/employee/list";
-        }
-    }
-    
-    @GetMapping("/update/{id}")
-    public String getEmployee(@PathVariable("id") Integer id, Model model) {
-        Optional<Employee> employee = service.getEmployeeById(id);
-        if (employee.isPresent()) {
-            model.addAttribute("employee", employee.get());
-            return "employee/update";
-        } else {
-            return "redirect:/employee/list";
-        }
-    }
-    
     @PostMapping("/create")
-    public String postRegister(Employee employee) {
-        service.saveEmployee(employee);
-        return "redirect:/employee/list";
-    }
-    
-    @PostMapping("/update/{id}")
-    public String postUser(Employee employee) {
+    public String postRegister(@Validated Employee employee, BindingResult res, Model model) {
+        if(res.hasErrors()) {
+            return getRegister(employee);
+        }
         service.saveEmployee(employee);
         return "redirect:/employee/list";
     }
 
-    @PostMapping("/delete/{id}")
-    public String deleteEmployee(@PathVariable("id") Integer id) {
-        service.deleteEmployee(id);
+    @GetMapping("/update/{id}/")
+    public String getEmployee(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("employee", service.getEmployeeById(id));
+        return "employee/update";
+    }
+
+    @PostMapping("/update/{id}/")
+    public String postEmployee(Employee employee) {
+        service.saveEmployee(employee);
         return "redirect:/employee/list";
     }
 
- 
- 
+    @PostMapping(path="list", params="deleteRun")
+    public String deleteRun(@RequestParam(name="idck") Integer idck, Model model) {
+        service.deleteEmployee(idck);
+        return "redirect:/employee/list";
+    }
 }

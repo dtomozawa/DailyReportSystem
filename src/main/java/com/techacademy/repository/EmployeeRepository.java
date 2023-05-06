@@ -7,3 +7,4 @@ import com.techacademy.entity.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 }
+

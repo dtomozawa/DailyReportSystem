@@ -1,12 +1,15 @@
 package com.techacademy.entity;
 
-import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 import lombok.Data;
 
 @Data
@@ -21,18 +24,22 @@ public class Employee {
 
     /** 氏名。20桁。null不許可 */
     @Column(length = 20, nullable = false)
+    @NotNull
+    @Length(max=20)
     private String name;
 
     /** 削除フラグ。null不許可 */
     @Column(nullable = false)
-    private Integer deleteFlag;
+    @NotNull
+    private Integer delete_flag;
 
     /** 登録日時。null不許可 */
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    @NotNull
+    private java.util.Date created_at;
 
     /** 更新日時。null不許可 */
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
+    @NotNull
+    private java.util.Date updated_at;
 }

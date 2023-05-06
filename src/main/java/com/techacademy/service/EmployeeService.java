@@ -32,6 +32,11 @@ public class EmployeeService {
     public void deleteEmployee(Integer id) {
         employeeRepository.deleteById(id);
     }
+
+	public Object getEmployeeList() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }
 
 
