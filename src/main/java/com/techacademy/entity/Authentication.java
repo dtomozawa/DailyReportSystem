@@ -38,7 +38,7 @@ public class Authentication {
     private String role;
 
     /** 従業員テーブルのID */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
     @NotNull
     private Employee employee;
@@ -51,5 +51,10 @@ public class Authentication {
 	public String getCode() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
+	}
+
+	public void setEmployee(Object object) {
+		// TODO 自動生成されたメソッド・スタブ
+		
 	}
 }

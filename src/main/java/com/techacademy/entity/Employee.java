@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -46,9 +48,19 @@ public class Employee {
     @NotNull
     private Date updated_at;
 
-    // 以下のフィールドを追加します
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy="employee") // "user"から"employee"に変更
     private Authentication authentication;
+
+    /** レコードが削除される前に行なう処理 */
+    @PreRemove
+    @Transactional
+    private void preRemove() {
+        // 認証エンティティからemployeeを切り離す // "user"から"employee"に変更
+        if (authentication != null) {
+            authentication.setEmployee(null); // "setUser"から"setEmployee"に変更
+        
+        }
+    }
 
 	public Object getAuthentication() {
 		// TODO 自動生成されたメソッド・スタブ
